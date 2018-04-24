@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController()
 class ExampleController {
 
-    @GetMapping("hello")
-    fun example() = "Hello World!"
+    @GetMapping("/api/hello")
+    fun example() = """{ "message": "Hello World!" }"""
 }
