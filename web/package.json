@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:gradle": "npm run build && npm run postbuild",
+    "build:gradle": "cross-env CI=true npm run test && npm run build && npm run postbuild",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "postbuild": "copyfiles -u 1 build/**/* ../server/src/main/resources/static"
@@ -16,7 +16,8 @@
     "react-scripts": "1.1.1"
   },
   "devDependencies": {
-    "copyfiles": "^2.0.0"
+    "copyfiles": "^2.0.0",
+    "cross-env": "^5.1.4"
   },
   "proxy": "http://localhost:8080"
 }
