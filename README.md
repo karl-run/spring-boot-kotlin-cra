@@ -49,10 +49,25 @@ If you already have a Spring Boot project running with Kotlin from [Spring Initi
 3. Testing Spring Boot with Spek, testing dependency injected fields.
 
 ### Serving a SPA (single page application) from Spring Boot 2
-TODO
+SPAs handle their own routing, which means that the Spring Boot server needs to route any request to index.html, but keep the path and query-params intact. It should also look completely transparent to the user that any redirect has happened.
+
+This can be tricky to do in Spring Boot without having to define every single static file you want to serve. The simple solution is to configure an error page to redirect to `/` . This is configured in [WebConfig.kt](https://github.com/karl-run/spring-boot-kotlin-cra/blob/master/server/src/main/kotlin/run/karl/starter/WebConfig.kt#L14-L19), by simply creating a bean that adds the error page that redirects to root on any text/html 404 request.
+
+```kotlin
+@Bean
+fun webServerFactory(): ConfigurableServletWebServerFactory {
+    val factory = TomcatServletWebServerFactory()
+    factory.errorPages.add(ErrorPage(HttpStatus.NOT_FOUND, "/"))
+    return factory
+}
+```
 
 ### Building and bundling the web-app into the server artifact
 TODO
 
 ### Testing Spring Boot with Spek, testing dependency injected fields.
 TODO
+
+## Contribute
+
+I'm not a master of gradle nor Kotlin, if you see something strange feel free to open an issue or submit a pull request.
