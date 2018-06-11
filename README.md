@@ -42,6 +42,8 @@ The template is now clean and ready to use.
 
 ## Learn from this template
 
+I wrote a [full, beginner-friendly blog post](https://karl.run/2018/05/07/kotlin-spring-boot-react/) on this. Some of the more important points a bit more terse:
+
 If you already have a Spring Boot project running with Kotlin from [Spring Initializr](https://start.spring.io/), and you would like to look at what this template has done instead, I'll go through the following steps:
 
 1. Serving a SPA (single page application) from Spring Boot 2
@@ -63,10 +65,103 @@ fun webServerFactory(): ConfigurableServletWebServerFactory {
 ```
 
 ### Building and bundling the web-app into the server artifact
-TODO
+
+Use [copyfiles](https://www.npmjs.com/package/copyfiles) and [cross-env](https://www.npmjs.com/package/cross-env).
+
+```json
+    "build:gradle": "cross-env CI=true npm run test && npm run build",
+    "postbuild": "copyfiles -u 1 build/**/* ../server/src/main/resources/static"
+```
+
+Then execute `build:gradle` from the gradle build with [gradle-node-plugin](https://github.com/srs/gradle-node-plugin).
+
+Add it to your buildscript dependencies: `classpath("com.moowork.gradle:gradle-node-plugin:1.2.0")`
+
+Apply the plugin: `apply plugin: 'com.moowork.node'`
+
+Create tasks for installing dependencies and running `build:gradle` and chain them into the gradle `build` target.
+
+```groovy
+task installDependencies(type: YarnTask) {
+    execOverrides {
+        it.workingDir = '../web'
+    }
+}
+
+task buildWeb(type: YarnTask) {
+    args = ['build:gradle']
+    execOverrides {
+        it.workingDir = '../web'
+    }
+}
+
+buildWeb.dependsOn installDependencies
+build.dependsOn buildWeb
+```
+
+Now `./gradlew build` builds your web app, moves it to the static folder and then builds the Spring Boot artifact. Ship it!
 
 ### Testing Spring Boot with Spek, testing dependency injected fields.
-TODO
+
+I found the easiest way to test the Spring Boot Kotlin code with dependency injection is to use Spek, hamkrest, mockito-kotlin 
+and use constructor autowiring.
+
+````groovy
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.jetbrains.spek:spek-api:1.1.5')
+    testCompile('com.natpryce:hamkrest:1.4.2.2')
+    testCompile 'com.nhaarman:mockito-kotlin:1.5.0'
+    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.1.5')
+````
+
+Controller and service example:
+
+```kotlin
+/* src/main/run/karl/starter/example/ExampleService.kt */
+
+@Service
+class ExampleService {
+    data class ExampleResponse(val message: String)
+
+    fun getSomeValue() = ExampleResponse("Hello Service!")
+}
+```
+
+```kotlin
+/* src/main/run/karl/starter/example/ExampleController.kt */
+
+@RestController()
+class ExampleController @Autowired constructor(
+        private val exampleService: ExampleService
+) {
+    @GetMapping("/api/hello", produces = ["application/json"])
+    fun example() = exampleService.getSomeValue()
+}
+```
+
+Note the constructor-autowiring in the controller. To test mock the service:
+
+```kotlin
+object ExampleControllerSpec : Spek({
+    describe("a very good controller") {
+        // Create a mock of ExampleService
+        val mockedExampleService = mock<ExampleService> {
+            /* Define that when getSomeValue is invoked, return this
+               value instead of executing the original code */
+            on { getSomeValue() } doReturn ExampleService.ExampleResponse("Mocked Message Wahoo!")
+        }
+        /* Specify that we want to use our mocked
+           ExampleService by passing it in as a named parameter */
+        val controller = ExampleController(exampleService = mockedExampleService)
+
+        it("should return invoke service but return mocked message") {
+            val value = controller.example()
+
+            assert.that(value.message, equalTo("Mocked Message Wahoo!") and endsWith("Wahoo!"))
+        }
+    }
+})
+```
 
 ## Contribute
 
