@@ -1,4 +1,4 @@
-# Spring Boot with Kotlin & bundled web with create-react-app
+# Spring Boot with Kotlin & bundled web with create-react-app (GraphQL branch)
 
 This is an example of a Spring Boot 2 server built with Kotlin, that automatically bundles and serves a [create-react-app](https://github.com/facebook/create-react-app) web-app when build.
 

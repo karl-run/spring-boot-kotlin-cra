@@ -1,0 +1,9 @@
+type ExampleResponse {
+    message: String!
+    isThisCool: Boolean!
+    resolveDeep: String!
+}
+
+type Query {
+    example: ExampleResponse!
+}

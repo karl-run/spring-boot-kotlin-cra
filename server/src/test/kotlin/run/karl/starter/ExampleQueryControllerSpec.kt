@@ -9,18 +9,19 @@ import com.nhaarman.mockito_kotlin.mock
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import run.karl.starter.example.ExampleController
+import run.karl.starter.example.ExampleQueryResolver
+import run.karl.starter.example.ExampleResponse
 import run.karl.starter.example.ExampleService
 
-object ExampleControllerSpec : Spek({
+object ExampleQueryControllerSpec : Spek({
     describe("a very good controller") {
         val mockedExampleService = mock<ExampleService> {
-            on { getSomeValue() } doReturn ExampleService.ExampleResponse("Mocked Message Wahoo!")
+            on { getSomeValue() } doReturn ExampleResponse("Mocked Message Wahoo!", false)
         }
-        val controller = ExampleController(exampleService = mockedExampleService)
+        val controller = ExampleQueryResolver(exampleService = mockedExampleService)
 
         it("should return invoke service but return mocked message") {
-            val value = controller.example()
+            val value = controller.getExample()
 
             assert.that(value.message, equalTo("Mocked Message Wahoo!") and endsWith("Wahoo!"))
         }
