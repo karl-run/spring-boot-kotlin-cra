@@ -6,6 +6,8 @@ The modules are structured in a way that makes it easy to use IntelliJ IDEA for 
 
 Uses [Spek](http://spekframework.org/) for testing in Kotlin.
 
+**Want GraphQL instead of REST? Check out the [GraphQL branch on this repo](https://github.com/karl-run/spring-boot-kotlin-cra/tree/graphql)**
+
 ## Development
 
 When developing you want to use the dev server that create-react-app provides. All XHR requests from the web-app are proxied to the backend. A typical development workflow will involve running the Spring Boot server and the create-react-app server separately.
