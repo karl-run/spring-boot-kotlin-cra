@@ -11,3 +11,8 @@ graphiql:
  mapping: /graphiql
  endpoint: /api/graphql
  enabled: true
+
+voyager:
+ mapping: /voyager
+ endpoint: /api/graphql
+ enabled: true
