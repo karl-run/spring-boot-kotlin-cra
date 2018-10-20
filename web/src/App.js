@@ -8,9 +8,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch('/api/hello')
+    fetch('/api/graphql', {
+      method: 'POST',
+      body: JSON.stringify({ 'query': `{ example { message } }`, 'variables': null, 'operationName': null }),
+    })
       .then(response => response.json())
-      .then(response => { this.setState({ message: response.message })});
+      .then(response => {this.setState({ message: response.data.example.message })});
   }
 
   render() {
