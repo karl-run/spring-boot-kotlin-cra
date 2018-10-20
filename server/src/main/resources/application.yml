@@ -1,18 +1,22 @@
 spring:
- mvc:
-  throw-exception-if-no-handler-found: true
+  mvc:
+    throw-exception-if-no-handler-found: true
 
 graphql:
- servlet:
-   mapping: /api/graphql
-   enabled: true
+  servlet:
+    mapping: /api/graphql
+    enabled: true
 
 graphiql:
- mapping: /graphiql
- endpoint: /api/graphql
- enabled: true
+  enabled: true
+  mapping: /graphiql
+  endpoint:
+    graphql: /api/graphql
+  cdn:
+    enabled: true
+    version: 0.12.0
 
 voyager:
- mapping: /voyager
- endpoint: /api/graphql
- enabled: true
+  mapping: /voyager
+  endpoint: /api/graphql
+  enabled: true
