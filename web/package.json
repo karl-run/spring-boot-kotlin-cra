@@ -17,14 +17,14 @@
     "postbuild": "rimraf '../server/src/main/resources/static' && copyfiles -u 1 'build/**/*' '../server/src/main/resources/static'"
   },
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts": "2.1.3"
   },
   "devDependencies": {
     "copyfiles": "^2.1.0",
     "cross-env": "^5.2.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.3"
   },
   "proxy": "http://localhost:8080"
 }
