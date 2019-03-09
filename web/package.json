@@ -14,7 +14,7 @@
     "build:gradle": "cross-env CI=true npm run test && npm run build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postbuild": "rimraf ../server/src/main/resources/static && copyfiles -E -u 1 build/**/* ../server/src/main/resources/static"
+    "postbuild": "rimraf ../server/src/main/resources/static && copyup -E \"build/**/*\" ../server/src/main/resources/static"
   },
   "dependencies": {
     "react": "^16.7.0",
