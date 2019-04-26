@@ -54,10 +54,10 @@ junitPlatform {
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('com.graphql-java-kickstart:graphql-spring-boot-starter:5.4')
-    implementation('com.graphql-java-kickstart:graphiql-spring-boot-starter:5.4')
-    implementation('com.graphql-java-kickstart:graphql-java-tools:5.4.1')
-    implementation('com.graphql-java-kickstart:voyager-spring-boot-starter:5.4')
+    implementation('com.graphql-java-kickstart:graphql-spring-boot-starter:5.8.1')
+    implementation('com.graphql-java-kickstart:graphiql-spring-boot-starter:5.8.1')
+    implementation('com.graphql-java-kickstart:voyager-spring-boot-starter:5.8.1')
+    implementation('com.graphql-java-kickstart:graphql-java-tools:5.6.0')
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
     implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     implementation('org.jetbrains.kotlin:kotlin-reflect')
