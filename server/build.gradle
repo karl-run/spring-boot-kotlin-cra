@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.3.20'
-        springBootVersion = '2.1.2.RELEASE'
+        kotlinVersion = '1.3.30'
+        springBootVersion = '2.1.4.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -11,7 +11,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
-        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.2.0")
         classpath("com.moowork.gradle:gradle-node-plugin:1.2.0")
     }
 }
@@ -58,9 +58,9 @@ dependencies {
     implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     implementation('org.jetbrains.kotlin:kotlin-reflect')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation 'org.jetbrains.spek:spek-api:1.1.5'
-    testImplementation 'com.natpryce:hamkrest:1.4.2.2'
-    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation 'org.jetbrains.spek:spek-api:1.1.4'
+    testImplementation 'com.natpryce:hamkrest:1.6.0.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
     testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
 }
 
