@@ -1,5 +1,9 @@
 # Spring Boot with Kotlin & bundled web with create-react-app
 
+# ⚠️ Deprecated ⚠️ 
+
+## This template hasn't been updated in 4 years. I recommend using the official [spring boot starter](https://start.spring.io/), and try and extract some of these concepts into your own template. You should look into using something different than create-react-app as well, maybe [Vite](https://vitejs.dev/).
+
 This is an example of a Spring Boot 2 server built with Kotlin, that automatically bundles and serves a [create-react-app](https://github.com/facebook/create-react-app) web-app when build.
 
 The modules are structured in a way that makes it easy to use IntelliJ IDEA for both modules, or if you prefer you can open them modules individually with your favourite tools.
